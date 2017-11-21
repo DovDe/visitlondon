@@ -1,0 +1,25 @@
+{
+  "name": "learnworkflow",
+  "version": "1.0.0",
+  "description": "Learning My web workflow with NPM, SASS, Gulp and more",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DovDe/learnWorkFlow.git"
+  },
+  "keywords": [
+    "SASS",
+    "NPM",
+    "GIT",
+    "GULP"
+  ],
+  "author": "Dov DeKeyser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DovDe/learnWorkFlow/issues"
+  },
+  "homepage": "https://github.com/DovDe/learnWorkFlow#readme"
+}
