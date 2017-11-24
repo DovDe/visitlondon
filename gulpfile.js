@@ -1,7 +1,8 @@
 const gulp             = require('gulp');
 const sass             = require('gulp-sass');
 const browserSync      = require('browser-sync');
-var reload = browserSync.reload;
+var reload             = browserSync.reload;
+var autoprefixer       = require('gulp-autoprefixer');
 
 // variable src folder
 var SOURCEPATHS = {
@@ -23,7 +24,18 @@ var APPPATH = {
 //app/css folder
 gulp.task('sass', function() {
   return gulp.src(SOURCEPATHS.sassSource)
+// adding autoprefixer this will automatically add
+// browser prefixes to make the app supproted across
+// all browsers
+    .pipe(autoprefixer());
+
+  //  this pipe is for the sass it defines how we are gong to
+  //the sass the outputStyle is currently on expanded but for
+  // development I will use compressed which will minify the css
     .pipe(sass({outputStyle: 'expanded'}).on('error',sass.logError))
+// this pips is the destination to add compile the sass to this pipe
+//needs to be last becuase the scss needs to be exported after all of
+//the scss and prfixes are added
     .pipe(gulp.dest(APPPATH.css));
 });
 
