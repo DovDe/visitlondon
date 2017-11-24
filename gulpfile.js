@@ -4,6 +4,7 @@ const browserSync      = require('browser-sync');
 var reload             = browserSync.reload;
 var autoprefixer       = require('gulp-autoprefixer');
 var clean              = require('gulp-clean');
+const concat           = require('gulp-concat');
 
 // variable src folder for all the source files of different file
 // types
@@ -61,6 +62,7 @@ gulp.task('sass', function() {
 
 gulp.task('scripts', ['clean-scripts'] ,function() {
   gulp.src(SOURCEPATHS.jsSource)
+  .pipe(concat('main.js'))
     .pipe(gulp.dest(APPPATH.js));
 });
 gulp.task('copy', ['clean-html'] ,function(){
