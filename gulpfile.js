@@ -5,13 +5,14 @@ var reload             = browserSync.reload;
 var autoprefixer       = require('gulp-autoprefixer');
 var clean              = require('gulp-clean');
 
-// variable src folder
+// variable src folder for all the source files of different file
+// types
 var SOURCEPATHS = {
   //the astrisc means that any file with the extention after it will be checked
 // this is defining the sass source
-  sassSource:'src/scss/*.scss',
-  // here I am adding all the html files
-  htmlSource: 'src/*.html'
+  sassSource:   'src/scss/*.scss',
+  htmlSource:   'src/*.html',
+  jsSource:     'src/js/*.js'
 }
 
 // variable app folder
@@ -21,7 +22,7 @@ var APPPATH = {
   js:   'app/js'
 
 }
-// CLean the app folder of any folders not in the development
+// CLean the app folder of any html files not in the development
 //folder
 gulp.task('clean-html', function(){
   // the read method defines if the method reads the file content
@@ -30,7 +31,15 @@ gulp.task('clean-html', function(){
   return gulp.src(APPPATH.root + '/*.html', {read: false, force:true})
   .pipe(clean());
 });
-
+// CLean the app folder of any js files not in the development
+//folder
+gulp.task('clean-scripts', function(){
+  // the read method defines if the method reads the file content
+  // in our case we only need to read the file name
+  //The force method actually enables to remove the path
+  return gulp.src(APPPATH.js + '/*.js', {read: false, force:true})
+  .pipe(clean());
+});
 
 // this task takes the app.scss and compiles it to the
 //app/css folder
@@ -50,6 +59,10 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(APPPATH.css));
 });
 
+gulp.task('scripts', ['clean-scripts'] ,function() {
+  gulp.src(SOURCEPATHS.jsSource)
+    .pipe(gulp.dest(APPPATH.js));
+});
 gulp.task('copy', ['clean-html'] ,function(){
   gulp.src(SOURCEPATHS.htmlSource)
     .pipe(gulp.dest(APPPATH.root));
@@ -69,13 +82,14 @@ gulp.task('serve', ['sass'], function(){
 });
 
 //  Watch method
-gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html'], function(){
+gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts' ,'scripts'], function(){
 // the first brakets in this method defines what to listen to
 // the second brakets in the method defines what to run once the
 // where changes
   gulp.watch([SOURCEPATHS.sassSource],['sass']);
-//
   gulp.watch([SOURCEPATHS.htmlSource],['copy']);
+  gulp.watch([SOURCEPATHS.jsSource],['scripts']);
+
 });
 // this task will tell gulp which tasks to run
 gulp.task('default', ['watch']);
