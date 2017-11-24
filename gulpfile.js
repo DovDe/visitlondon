@@ -3,6 +3,7 @@ const sass             = require('gulp-sass');
 const browserSync      = require('browser-sync');
 var reload             = browserSync.reload;
 var autoprefixer       = require('gulp-autoprefixer');
+var clean              = require('gulp-clean');
 
 // variable src folder
 var SOURCEPATHS = {
@@ -20,6 +21,15 @@ var APPPATH = {
   js:   'app/js'
 
 }
+// CLean the app folder of any folders not in the development
+//folder
+gulp.task('clean-html', function(){
+  // the read method defines if the method reads the file content
+  // in our case we only need to read the file name
+  //The force method actually enables to remove the path
+  return gulp.src(APPPATH.root + '/*.html', {read: false, force:true})
+  .pipe(clean());
+});
 
 
 // this task takes the app.scss and compiles it to the
@@ -40,16 +50,10 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(APPPATH.css));
 });
 
-
-
-gulp.task('copy', function(){
+gulp.task('copy', ['clean-html'] ,function(){
   gulp.src(SOURCEPATHS.htmlSource)
     .pipe(gulp.dest(APPPATH.root));
 });
-
-
-
-
 
 // this is called serve because we are using this with browserSync
 // to create a server for us.
@@ -65,7 +69,7 @@ gulp.task('serve', ['sass'], function(){
 });
 
 //  Watch method
-gulp.task('watch', ['serve', 'sass', 'copy'], function(){
+gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html'], function(){
 // the first brakets in this method defines what to listen to
 // the second brakets in the method defines what to run once the
 // where changes
