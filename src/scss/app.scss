@@ -1,5 +1,9 @@
 $black: #000000;
 
 body{
-  background-color: red;
+  background-color: white;
+}
+h1:hover{
+  color: white;
+  background-color: $black;
 }

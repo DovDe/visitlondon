@@ -1,11 +1,12 @@
-var gulp             = require('gulp');
-var sass             = require('gulp-sass');
-var browserSync      = require('browser-sync');
+var gulp               = require('gulp');
+var sass               = require('gulp-sass');
+var browserSync        = require('browser-sync');
 var reload             = browserSync.reload;
 var autoprefixer       = require('gulp-autoprefixer');
 var browserify         = require('gulp-browserify');
 var clean              = require('gulp-clean');
 var concat             = require('gulp-concat');
+var merge              = require('merge-stream');
 
 
 // variable src folder for all the source files of different file
@@ -47,7 +48,10 @@ gulp.task('clean-scripts', function(){
 // this task takes the app.scss and compiles it to the
 //app/css folder
 gulp.task('sass', function() {
-  return gulp.src(SOURCEPATHS.sassSource)
+  var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
+  var sassFiles;
+
+  sassFiles =  gulp.src(SOURCEPATHS.sassSource)
 // adding autoprefixer this will automatically add
 // browser prefixes to make the app supproted across
 // all browsers
@@ -56,9 +60,17 @@ gulp.task('sass', function() {
   //the sass the outputStyle is currently on expanded but for
   // development I will use compressed which will minify the css
     .pipe(sass({outputStyle: 'expanded'}).on('error',sass.logError))
-// this pips is the destination to add compile the sass to this pipe
-//needs to be last becuase the scss needs to be exported after all of
-//the scss and prfixes are added
+
+
+// here I am merging the sass and bootstrap files and the conctinating them
+//into app.css
+// here the order that we merge the files matters for instance it is important to add
+//the bootstrap code first then to add the sass so we can override the bootstrao code
+return merge(bootstrapCSS,sassFiles)
+    .pipe(concat('app.css'))
+    // this pips is the destination to add compile the sass to this pipe
+    //needs to be last becuase the scss needs to be exported after all of
+    //the scss and prfixes are added
     .pipe(gulp.dest(APPPATH.css));
 });
 
