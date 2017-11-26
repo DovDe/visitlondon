@@ -1,10 +1,12 @@
-const gulp             = require('gulp');
-const sass             = require('gulp-sass');
-const browserSync      = require('browser-sync');
+var gulp             = require('gulp');
+var sass             = require('gulp-sass');
+var browserSync      = require('browser-sync');
 var reload             = browserSync.reload;
 var autoprefixer       = require('gulp-autoprefixer');
+var browserify         = require('gulp-browserify');
 var clean              = require('gulp-clean');
-const concat           = require('gulp-concat');
+var concat             = require('gulp-concat');
+
 
 // variable src folder for all the source files of different file
 // types
@@ -13,7 +15,7 @@ var SOURCEPATHS = {
 // this is defining the sass source
   sassSource:   'src/scss/*.scss',
   htmlSource:   'src/*.html',
-  jsSource:     'src/js/*.js'
+  jsSource:     'src/js/**'
 }
 
 // variable app folder
@@ -63,7 +65,8 @@ gulp.task('sass', function() {
 gulp.task('scripts', ['clean-scripts'] ,function() {
   gulp.src(SOURCEPATHS.jsSource)
   .pipe(concat('main.js'))
-    .pipe(gulp.dest(APPPATH.js));
+  .pipe(browserify())
+  .pipe(gulp.dest(APPPATH.js));
 });
 gulp.task('copy', ['clean-html'] ,function(){
   gulp.src(SOURCEPATHS.htmlSource)
