@@ -23,7 +23,8 @@ var SOURCEPATHS = {
 var APPPATH = {
   root: 'app/',
   css: 'app/css',
-  js:   'app/js'
+  js:   'app/js',
+  fonts: 'app/fonts'
 
 }
 // CLean the app folder of any html files not in the development
@@ -52,26 +53,29 @@ gulp.task('sass', function() {
   var sassFiles;
 
   sassFiles =  gulp.src(SOURCEPATHS.sassSource)
-// adding autoprefixer this will automatically add
-// browser prefixes to make the app supproted across
-// all browsers
-    .pipe(autoprefixer())
-  //  this pipe is for the sass it defines how we are gong to
-  //the sass the outputStyle is currently on expanded but for
-  // development I will use compressed which will minify the css
-    .pipe(sass({outputStyle: 'expanded'}).on('error',sass.logError))
+    // adding autoprefixer this will automatically add
+    // browser prefixes to make the app supproted across
+    // all browsers
+        .pipe(autoprefixer())
+      //  this pipe is for the sass it defines how we are gong to
+      //the sass the outputStyle is currently on expanded but for
+      // development I will use compressed which will minify the css
+        .pipe(sass({outputStyle: 'expanded'}).on('error',sass.logError))
+    // here I am merging the sass and bootstrap files and the conctinating them into app.css
+    // here the order that we merge the files matters for instance it is important to add
+    //the bootstrap code first then to add the sass so we can override the bootstrao code
+    return merge(bootstrapCSS,sassFiles)
+        .pipe(concat('app.css'))
+        // this pips is the destination to add compile the sass to this pipe
+        //needs to be last becuase the scss needs to be exported after all of
+        //the scss and prfixes are added
+        .pipe(gulp.dest(APPPATH.css))
+});
 
-
-// here I am merging the sass and bootstrap files and the conctinating them
-//into app.css
-// here the order that we merge the files matters for instance it is important to add
-//the bootstrap code first then to add the sass so we can override the bootstrao code
-return merge(bootstrapCSS,sassFiles)
-    .pipe(concat('app.css'))
-    // this pips is the destination to add compile the sass to this pipe
-    //needs to be last becuase the scss needs to be exported after all of
-    //the scss and prfixes are added
-    .pipe(gulp.dest(APPPATH.css));
+// task to move bootstrap fonts.
+gulp.task('moveFonts', function(){
+  gulp.src('./node_modules/bootstrap/dist/fonts/*.{eot,svg,ttf,woff,woff2}')
+  .pipe(gulp.dest(APPPATH.fonts));
 });
 
 gulp.task('scripts', ['clean-scripts'] ,function() {
@@ -99,7 +103,7 @@ gulp.task('serve', ['sass'], function(){
 });
 
 //  Watch method
-gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts' ,'scripts'], function(){
+gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts' ,'scripts', 'moveFonts'], function(){
 // the first brakets in this method defines what to listen to
 // the second brakets in the method defines what to run once the
 // where changes
