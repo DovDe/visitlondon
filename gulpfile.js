@@ -7,7 +7,8 @@ var browserify         = require('gulp-browserify');
 var clean              = require('gulp-clean');
 var concat             = require('gulp-concat');
 var merge              = require('merge-stream');
-
+var newer              = require('gulp-newer');
+var imagemin           = require('gulp-imagemin');
 
 // variable src folder for all the source files of different file
 // types
@@ -16,15 +17,17 @@ var SOURCEPATHS = {
 // this is defining the sass source
   sassSource:   'src/scss/*.scss',
   htmlSource:   'src/*.html',
-  jsSource:     'src/js/**'
+  jsSource:     'src/js/**',
+  imgSource:    'src/img/**'
 }
 
 // variable app folder
 var APPPATH = {
-  root: 'app/',
-  css: 'app/css',
-  js:   'app/js',
-  fonts: 'app/fonts'
+  root:    'app/',
+  css:     'app/css',
+  js:      'app/js',
+  fonts:   'app/fonts',
+  img:     'app/img'
 
 }
 // CLean the app folder of any html files not in the development
@@ -72,6 +75,14 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(APPPATH.css))
 });
 
+
+// task to transfer images
+gulp.task('images',function(){
+    return gulp.src(SOURCEPATHS.imgSource)
+    .pipe(newer(APPPATH.img))
+    .pipe(imagemin())
+    .pipe(gulp.dest(APPPATH.img));
+});
 // task to move bootstrap fonts.
 gulp.task('moveFonts', function(){
   gulp.src('./node_modules/bootstrap/dist/fonts/*.{eot,svg,ttf,woff,woff2}')
@@ -103,7 +114,7 @@ gulp.task('serve', ['sass'], function(){
 });
 
 //  Watch method
-gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts' ,'scripts', 'moveFonts'], function(){
+gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts' ,'scripts', 'moveFonts','images'], function(){
 // the first brakets in this method defines what to listen to
 // the second brakets in the method defines what to run once the
 // where changes
