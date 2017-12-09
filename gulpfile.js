@@ -13,7 +13,7 @@ var injectPartials     = require('gulp-inject-partials');
 var minify             = require('gulp-minify');
 var rename             = require('gulp-rename');
 var cssmin             = require('gulp-cssmin');
-
+var htmlmin            = require('gulp-htmlmin');
 
 
 // variable src folder for all the source files of different file
@@ -129,7 +129,14 @@ gulp.task('compresscss', function() {
         .pipe(rename({suffix:'.min'}))
         .pipe(gulp.dest(APPPATH.css))
 });
+gulp.task('minifyHtml', function() {
+  return gulp.src(SOURCEPATHS.htmlSource)
+  .pipe(injectPartials())
+  .pipe(htmlmin({collapseWhitespace:true}))
+  .pipe(gulp.dest(APPPATH.root))
+});
 
+gulp.task('production', ['minifyHtml','compresscss','compress']);
 //================================================
 //END Production tasks
 //================================================
