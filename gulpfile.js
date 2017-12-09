@@ -10,6 +10,7 @@ var merge              = require('merge-stream');
 var newer              = require('gulp-newer');
 var imagemin           = require('gulp-imagemin');
 var injectPartials     = require('gulp-inject-partials');
+var minify             = require('gulp-minify');
 
 // variable src folder for all the source files of different file
 // types
@@ -98,6 +99,13 @@ gulp.task('scripts', ['clean-scripts'] ,function() {
   .pipe(gulp.dest(APPPATH.js));
 });
 
+gulp.task('compress', function() {
+  gulp.src(SOURCEPATHS.jsSource)
+  .pipe(concat('main.js'))
+  .pipe(browserify())
+  .pipe(minify())
+  .pipe(gulp.dest(APPPATH.js));
+});
 // gulp.task('copy', ['clean-html'] ,function(){
 //   gulp.src(SOURCEPATHS.htmlSource)
 //     .pipe(gulp.dest(APPPATH.root));
