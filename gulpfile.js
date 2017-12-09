@@ -9,16 +9,18 @@ var concat             = require('gulp-concat');
 var merge              = require('merge-stream');
 var newer              = require('gulp-newer');
 var imagemin           = require('gulp-imagemin');
+var injectPartials     = require('gulp-inject-partials');
 
 // variable src folder for all the source files of different file
 // types
 var SOURCEPATHS = {
   //the astrisc means that any file with the extention after it will be checked
 // this is defining the sass source
-  sassSource:   'src/scss/*.scss',
-  htmlSource:   'src/*.html',
-  jsSource:     'src/js/**',
-  imgSource:    'src/img/**'
+  sassSource:          'src/scss/*.scss',
+  htmlSource:          'src/*.html',
+  htmlPartialSource:   'src/partial/*.html',
+  jsSource:            'src/js/**',
+  imgSource:           'src/img/**'
 }
 
 // variable app folder
@@ -95,10 +97,19 @@ gulp.task('scripts', ['clean-scripts'] ,function() {
   .pipe(browserify())
   .pipe(gulp.dest(APPPATH.js));
 });
-gulp.task('copy', ['clean-html'] ,function(){
-  gulp.src(SOURCEPATHS.htmlSource)
-    .pipe(gulp.dest(APPPATH.root));
+
+// gulp.task('copy', ['clean-html'] ,function(){
+//   gulp.src(SOURCEPATHS.htmlSource)
+//     .pipe(gulp.dest(APPPATH.root));
+// });
+
+//  task to inject html partials
+gulp.task('html', function() {
+  return gulp.src(SOURCEPATHS.htmlSource)
+  .pipe(injectPartials())
+  .pipe(gulp.dest(APPPATH.root))
 });
+
 
 // this is called serve because we are using this with browserSync
 // to create a server for us.
@@ -114,13 +125,15 @@ gulp.task('serve', ['sass'], function(){
 });
 
 //  Watch method
-gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts' ,'scripts', 'moveFonts','images'], function(){
+gulp.task('watch', ['serve', 'sass', 'clean-html', 'clean-scripts' ,'scripts', 'moveFonts','images', 'html'], function(){
 // the first brakets in this method defines what to listen to
 // the second brakets in the method defines what to run once the
 // where changes
   gulp.watch([SOURCEPATHS.sassSource],['sass']);
-  gulp.watch([SOURCEPATHS.htmlSource],['copy']);
+  // gulp.watch([SOURCEPATHS.htmlSource],['copy']);
   gulp.watch([SOURCEPATHS.jsSource],['scripts']);
+  gulp.watch([SOURCEPATHS.imgSource],['images']);
+  gulp.watch([SOURCEPATHS.htmlSource, SOURCEPATHS.htmlPartialSource],['html']);
 
 });
 // this task will tell gulp which tasks to run
