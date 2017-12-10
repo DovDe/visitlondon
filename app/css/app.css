@@ -6758,3 +6758,6 @@ button.close {
 
 /* darken is a sass function  to darken a color       */
 /* lighten is a sass function  to lighten a color       */
+h2 {
+  margin: 20px;
+}

@@ -22,6 +22,7 @@ var SOURCEPATHS = {
   //the astrisc means that any file with the extention after it will be checked
 // this is defining the sass source
   sassSource:          'src/scss/*.scss',
+  sassApp:             'src/scss/app.scss',
   htmlSource:          'src/*.html',
   htmlPartialSource:   'src/partial/*.html',
   jsSource:            'src/js/**',
@@ -62,7 +63,7 @@ gulp.task('sass', function() {
   var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
   var sassFiles;
 
-  sassFiles =  gulp.src(SOURCEPATHS.sassSource)
+  sassFiles =  gulp.src(SOURCEPATHS.sassApp)
     // adding autoprefixer this will automatically add
     // browser prefixes to make the app supproted across
     // all browsers
