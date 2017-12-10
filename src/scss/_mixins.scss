@@ -13,3 +13,16 @@
      @content;
   }
 }
+
+@mixin clearfix {
+  *zoom: 1;
+  //the &:before is the same as clearfix:before
+  &:before,
+  &:after{
+      content:' ';
+      display: table;
+  }
+  &:after{
+    clear: both;
+  }
+}
