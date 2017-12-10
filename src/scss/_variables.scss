@@ -13,7 +13,7 @@ $bg-color: $blue;
 $text-color: $black;
 
 $paragraph-font-size: 1.8rem;
-$paragraph-font-family: Arial,Helvetica,sans-serif;
+$paragraph-font-family: 'Open Sans', sans-serif;
 
 $nav-bg-color: $dark-blue;
 $menu-anchor-font-size: 1.4rem;
@@ -31,8 +31,8 @@ $heading-font-size: (
     h5: 24px,
     h6: 20px
 );
-$heading-font-family: Arial,Helvetica, sans-serif;
-
+$heading-font-family: 'Bitter', serif;
+$heading-font-weight: 700;
 //=================
 // visit variables
 //===================

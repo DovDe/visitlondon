@@ -6756,11 +6756,13 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,700|Open+Sans:400,700);
 /* darken is a sass function  to darken a color       */
 /* lighten is a sass function  to lighten a color       */
 h1, h2, h3, h4, h5, h6 {
   color: #FFBE00;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Bitter", serif;
+  font-weight: 700;
 }
 
 h2 {
@@ -6775,7 +6777,7 @@ body {
   background-color: #0076A3;
   font-size: 1.8rem;
   color: #000000;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 main#main-content {
