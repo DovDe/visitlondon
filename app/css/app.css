@@ -6758,7 +6758,3 @@ button.close {
 
 /* darken is a sass function  to darken a color       */
 /* lighten is a sass function  to lighten a color       */
-body {
-  background-color: #0076A3;
-  color: #000000;
-}
