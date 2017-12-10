@@ -29,3 +29,9 @@ main#main-content {
 footer {
   background-color: #005170;
 }
+
+.container {
+  margin: 0 auto;
+  width: 95%;
+  max-width: 1200px;
+}
