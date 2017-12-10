@@ -60,9 +60,12 @@ gulp.task('clean-scripts', function(){
 // this task takes the app.scss and compiles it to the
 //app/css folder
 gulp.task('sass', function() {
-  var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
-  var sassFiles;
-
+  //=====================================================
+  // FOR BOOTSTRAP NOT NEEDED WITHOUT BOOTSTRAP
+  //====================
+  // var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
+  // var sassFiles;
+ //=================================================
   sassFiles =  gulp.src(SOURCEPATHS.sassApp)
     // adding autoprefixer this will automatically add
     // browser prefixes to make the app supproted across
@@ -72,10 +75,14 @@ gulp.task('sass', function() {
       //the sass the outputStyle is currently on expanded but for
       // development I will use compressed which will minify the css
         .pipe(sass({outputStyle: 'expanded'}).on('error',sass.logError))
+
+      //==============================================
+      //==FOR BOOTSTRAP NOT NEEDED WITHOUT
     // here I am merging the sass and bootstrap files and the conctinating them into app.css
     // here the order that we merge the files matters for instance it is important to add
     //the bootstrap code first then to add the sass so we can override the bootstrao code
-    return merge(bootstrapCSS,sassFiles)
+    // return merge(bootstrapCSS,sassFiles)
+    //======================================================
         .pipe(concat('app.css'))
         // this pips is the destination to add compile the sass to this pipe
         //needs to be last becuase the scss needs to be exported after all of
@@ -91,12 +98,14 @@ gulp.task('images',function(){
     .pipe(imagemin())
     .pipe(gulp.dest(APPPATH.img));
 });
-// task to move bootstrap fonts.
-gulp.task('moveFonts', function(){
-  gulp.src('./node_modules/bootstrap/dist/fonts/*.{eot,svg,ttf,woff,woff2}')
-  .pipe(gulp.dest(APPPATH.fonts));
-});
 
+//=================================================
+// task to move bootstrap fonts.
+// gulp.task('moveFonts', function(){
+//   gulp.src('./node_modules/bootstrap/dist/fonts/*.{eot,svg,ttf,woff,woff2}')
+//   .pipe(gulp.dest(APPPATH.fonts));
+// });
+//======================================================
 gulp.task('scripts', ['clean-scripts'] ,function() {
   gulp.src(SOURCEPATHS.jsSource)
   .pipe(concat('main.js'))
@@ -116,15 +125,19 @@ gulp.task('compress', function() {
 });
 
 gulp.task('compresscss', function() {
-  var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
-  var sassFiles;
+//===========================================
+  //FOR BOOTSTRAP ONLY
+  // var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
+  // var sassFiles;
+  //===============================================================
 
   sassFiles =  gulp.src(SOURCEPATHS.sassSource)
 
         .pipe(autoprefixer())
         .pipe(sass({outputStyle: 'expanded'}).on('error',sass.logError))
-
-    return merge(bootstrapCSS,sassFiles)
+//FOR BOOTSTRAP ===================================
+    // return merge(bootstrapCSS,sassFiles)
+//=========================================
         .pipe(concat('app.css'))
         .pipe(cssmin())
         .pipe(rename({suffix:'.min'}))
@@ -168,8 +181,8 @@ gulp.task('serve', ['sass'], function(){
 
 });
 
-//  Watch method
-gulp.task('watch', ['serve', 'sass', 'clean-html', 'clean-scripts' ,'scripts', 'moveFonts','images', 'html'], function(){
+//  Watch method if using bootstrap add the movefonts task after scripts task
+gulp.task('watch', ['serve', 'sass', 'clean-html', 'clean-scripts' ,'scripts','images', 'html'], function(){
 // the first brakets in this method defines what to listen to
 // the second brakets in the method defines what to run once the
 // where changes
