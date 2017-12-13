@@ -136,3 +136,33 @@ footer {
     margin-right: 0px;
   }
 }
+
+.background-image {
+  display: table;
+  width: 100%;
+  position: relative;
+}
+
+.background-image .content-bg-image {
+  display: table-cell;
+  vertical-align: bottom;
+  padding: 0 20px 20px 20px;
+  position: relative;
+}
+
+.background-image .content-bg-image h1 {
+  font-size: 40px;
+}
+
+.background-image .content-bg-image p {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.london {
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6)), url("../img/bg/bg01.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  height: 600px;
+}
