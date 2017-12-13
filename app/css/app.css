@@ -55,3 +55,84 @@ footer {
     max-width: 1200px;
   }
 }
+
+.navigation {
+  *zoom: 1;
+  padding: 10px;
+  background-color: #005170;
+}
+
+.navigation:before, .navigation:after {
+  content: ' ';
+  display: table;
+}
+
+.navigation:after {
+  clear: both;
+}
+
+.navigation h2 {
+  text-align: left;
+  margin: 0;
+}
+
+.navigation h2.site-name {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .navigation h2.site-name {
+    display: inline-block;
+  }
+}
+
+.navigation h2.nav-title {
+  display: block;
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .navigation h2.nav-title {
+    display: none;
+  }
+}
+
+.navigation nav {
+  display: inline;
+  margin-top: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .navigation nav {
+    float: right;
+  }
+}
+
+.navigation nav a {
+  color: #FFFFFF;
+  font-size: 1.4rem;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.navigation nav a:hover {
+  color: #FFBE00;
+}
+
+@media only screen and (min-width: 768px) {
+  .navigation nav a {
+    display: inline;
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .navigation nav a {
+    margin-right: 20px;
+  }
+  .navigation nav a:last-child {
+    margin-right: 0px;
+  }
+}
