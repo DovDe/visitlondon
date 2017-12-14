@@ -358,3 +358,38 @@ footer {
 .btn:hover {
   background-color: #997200;
 }
+
+.gallery {
+  *zoom: 1;
+}
+
+.gallery:before, .gallery:after {
+  content: ' ';
+  display: table;
+}
+
+.gallery:after {
+  clear: both;
+}
+
+.gallery li.image-container {
+  float: left;
+  list-style: none;
+  width: 23.5%;
+}
+
+.gallery li.image-container:nth-child(n) {
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+
+.gallery li.image-container:nth-child(4n + 1) {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.gallery li.image-container img {
+  display: block;
+  max-width: 100%;
+  border-radius: 10px;
+}
