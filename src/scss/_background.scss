@@ -20,3 +20,6 @@
 .london{
   @include bg-mixin('../img/bg/bg01.jpg', 600px, top center);
 }
+.subway{
+  @include bg-mixin('../img/bg/bg03.jpg', 350px);
+}

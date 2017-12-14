@@ -171,6 +171,14 @@ footer {
   height: 600px;
 }
 
+.subway {
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6)), url("../img/bg/bg03.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 350px;
+}
+
 .card {
   margin-bottom: 30px;
 }
