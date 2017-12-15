@@ -176,59 +176,59 @@ footer {
   }
 }
 
-.navigation {
+.navigation, .footer-navigation {
   *zoom: 1;
   padding: 10px;
   background-color: #005170;
 }
 
-.navigation:before, .navigation:after {
+.navigation:before, .footer-navigation:before, .navigation:after, .footer-navigation:after {
   content: ' ';
   display: table;
 }
 
-.navigation:after {
+.navigation:after, .footer-navigation:after {
   clear: both;
 }
 
-.navigation h2 {
+.navigation h2, .footer-navigation h2 {
   text-align: left;
   margin: 0;
 }
 
-.navigation h2.site-name {
+.navigation h2.site-name, .footer-navigation h2.site-name {
   display: none;
 }
 
 @media only screen and (min-width: 768px) {
-  .navigation h2.site-name {
+  .navigation h2.site-name, .footer-navigation h2.site-name {
     display: inline-block;
   }
 }
 
-.navigation h2.nav-title {
+.navigation h2.nav-title, .footer-navigation h2.nav-title {
   display: block;
   text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
-  .navigation h2.nav-title {
+  .navigation h2.nav-title, .footer-navigation h2.nav-title {
     display: none;
   }
 }
 
-.navigation nav {
+.navigation nav, .footer-navigation nav {
   display: inline;
   margin-top: 10px;
 }
 
 @media only screen and (min-width: 768px) {
-  .navigation nav {
+  .navigation nav, .footer-navigation nav {
     float: right;
   }
 }
 
-.navigation nav a {
+.navigation nav a, .footer-navigation nav a {
   color: #FFFFFF;
   font-size: 1.4rem;
   text-decoration: none;
@@ -237,24 +237,33 @@ footer {
   text-align: center;
 }
 
-.navigation nav a:hover {
+.navigation nav a:hover, .footer-navigation nav a:hover {
   color: #FFBE00;
 }
 
 @media only screen and (min-width: 768px) {
-  .navigation nav a {
+  .navigation nav a, .footer-navigation nav a {
     display: inline;
     text-align: left;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .navigation nav a {
+  .navigation nav a, .footer-navigation nav a {
     margin-right: 20px;
   }
-  .navigation nav a:last-child {
+  .navigation nav a:last-child, .footer-navigation nav a:last-child {
     margin-right: 0px;
   }
+}
+
+.footer-navigation .menu {
+  float: left;
+}
+
+.footer-navigation .menu a {
+  text-transform: uppercase;
+  font-size: 1rem;
 }
 
 .background-image {
@@ -486,4 +495,23 @@ table > tbody > tr td {
 .services-list li p {
   color: #FFFFFF;
   font-size: 1rem;
+}
+
+footer.site-footer {
+  padding-top: 10px;
+  margin-top: 30px;
+  color: #FFFFFF;
+}
+
+footer.site-footer h2 {
+  margin: 0;
+}
+
+footer.site-footer p.site-info {
+  text-align: center;
+  background-color: #FFBE00;
+  color: #005170;
+  padding: 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
 }
