@@ -319,7 +319,7 @@ footer {
 }
 
 .card .card-content p {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .card:after {
@@ -359,6 +359,30 @@ footer {
   background-color: #997200;
 }
 
+.btn-service {
+  border-radius: 5px;
+  display: block;
+  background-color: #fe2d28;
+  color: #FFFFFF;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  transition: all .3s ease;
+  font-weight: bold;
+  padding: 10px 30px;
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .btn-service {
+    display: inline-block;
+  }
+}
+
+.btn-service:hover {
+  background-color: #f20701;
+}
+
 .gallery {
   *zoom: 1;
 }
@@ -392,4 +416,74 @@ footer {
   display: block;
   max-width: 100%;
   border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  border-collapse: collapse;
+}
+
+table > caption {
+  text-align: left;
+  font-family: "Bitter", serif;
+  font-size: 36px;
+  font-weight: 700;
+  padding: 5px;
+  color: #FFBE00;
+  margin-bottom: 2 0px;
+}
+
+table thead tr th {
+  background-color: #002c3d;
+  color: #FFFFFF;
+  font-size: 1.3rem;
+}
+
+table > thead > tr,
+table > tbody > tr {
+  color: #FFFFFF;
+  background-color: #005170;
+}
+
+table > thead > tr:nth-child(odd),
+table > tbody > tr:nth-child(odd) {
+  background-color: #0076A3;
+}
+
+table > thead > tr:hover,
+table > tbody > tr:hover {
+  background-color: #e6ab00;
+}
+
+table > thead > tr th,
+table > thead > tr td,
+table > tbody > tr th,
+table > tbody > tr td {
+  padding: 10px;
+  border-bottom: 1px dotted #005170;
+}
+
+.services h2 {
+  font-size: 36px;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+}
+
+.services-list li {
+  text-align: center;
+}
+
+.services-list li h3 {
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.services-list li p {
+  color: #FFFFFF;
+  font-size: 1rem;
 }

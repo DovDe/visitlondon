@@ -20,9 +20,10 @@ $nav-bg-color: $dark-blue;
 $menu-anchor-font-size: 1.4rem;
 $menu-anchor-hover-color: $yellow;
 
+
 //Cards
 $card-bg-color: $white;
-$card-text-font-size: 1rem;
+$card-text-font-size: 1.2rem;
 //=============================
 // HEADING
 //=============================
@@ -66,3 +67,9 @@ $btn-font-weight: bold;
 //=======================
 
 $bg-footer: $dark-blue;
+//Table
+$table-font-size: 1rem;
+$table-caption-font-family: $heading-font-family;
+$table-caption-text-color: $yellow;
+$table-color: $white;
+$table-hover-background-color: darken($yellow, 5);
